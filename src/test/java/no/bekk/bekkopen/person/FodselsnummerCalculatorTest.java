@@ -1,7 +1,7 @@
 package no.bekk.bekkopen.person;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -9,16 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class FodselsnummerCalculatorTest {
 
 	private DateFormat df = null;
 	private Date date = null;
 
-	@BeforeEach
+	@Before
 	public void setUpDate() throws Exception {
 		df = new SimpleDateFormat("ddMMyyyy");
 		date = df.parse("09062006");
@@ -27,26 +27,26 @@ public class FodselsnummerCalculatorTest {
 	@Test
 	public void testGetFodselsnummerForDate() {
 		List<Fodselsnummer> options = FodselsnummerCalculator.getManyFodselsnummerForDate(date);
-		assertTrue(options.size() > 20, "Forventet minst 20 fødselsnumre, men fikk " + options.size());
+		assertTrue("Forventet minst 20 fødselsnumre, men fikk " + options.size(), options.size() > 20);
 	}
 
 	@Test
 	public void getValidFodselsnummerForDate() {
 		List<Fodselsnummer> validOptions = FodselsnummerCalculator.getManyFodselsnummerForDate(date);
-		assertTrue(validOptions.size() == 413, "Forventet 413 fødselsnumre, men fikk " + validOptions.size());
+		assertTrue("Forventet 413 fødselsnumre, men fikk " + validOptions.size(), validOptions.size() == 413);
 	}
 
 	@Test
 	public void testThatAllGeneratedNumbersAreValid() {
 		for(Fodselsnummer fnr : FodselsnummerCalculator.getManyFodselsnummerForDate(date)) {
-			assertTrue(FodselsnummerValidator.isValid(fnr.toString()), "Ugyldig fødselsnummer: " + fnr);
+			assertTrue("Ugyldig fødselsnummer: " + fnr, FodselsnummerValidator.isValid(fnr.toString()));
 		}
 	}
 
 	@Test
 	public void testThatAllGeneratedNumbersAreNotDNumbers() {
 		for(Fodselsnummer fnr : FodselsnummerCalculator.getManyFodselsnummerForDate(date)) {
-      assertFalse(Fodselsnummer.isDNumber(fnr.toString()), "Ugyldig fødselsnummer: " + fnr);
+      assertFalse("Ugyldig fødselsnummer: " + fnr, Fodselsnummer.isDNumber(fnr.toString()));
 		}
 	}
 
@@ -63,14 +63,14 @@ public class FodselsnummerCalculatorTest {
 	@Test
 	public void testThatAllGeneratedDNumbersAreValid() {
 		for(Fodselsnummer dnr : FodselsnummerCalculator.getManyDNumberFodselsnummerForDate(date)) {
-			assertTrue(FodselsnummerValidator.isValid(dnr.toString()), "Ugyldig D-nummer: " + dnr);
+			assertTrue("Ugyldig D-nummer: " + dnr, FodselsnummerValidator.isValid(dnr.toString()));
 		}
 	}
 
 	@Test
 	public void testThatAllGeneratedDNumbersAreDNumbers() {
 		for(Fodselsnummer dnr : FodselsnummerCalculator.getManyDNumberFodselsnummerForDate(date)) {
-      assertTrue(Fodselsnummer.isDNumber(dnr.toString()), "Ugyldig D-nummer: " + dnr);
+      assertTrue("Ugyldig D-nummer: " + dnr, Fodselsnummer.isDNumber(dnr.toString()));
 		}
 	}
 

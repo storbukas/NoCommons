@@ -1,31 +1,31 @@
 package no.bekk.bekkopen.person;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 public class SyntheticFodselsnummerCalculatorTest {
 
   private Date date = null;
 
-  @BeforeAll
+  @BeforeClass
   public static void setup() {
     FodselsnummerValidator.ALLOW_SYNTHETIC_NUMBERS = true;
   }
 
-  @AfterAll
+  @AfterClass
   public static void taredown() {
     FodselsnummerValidator.ALLOW_SYNTHETIC_NUMBERS = false;
   }
 
-  @BeforeEach
+  @Before
   public void setUpDate() throws Exception {
     DateFormat df = new SimpleDateFormat("ddMMyyyy");
     date = df.parse("09062006");
@@ -34,7 +34,7 @@ public class SyntheticFodselsnummerCalculatorTest {
   @Test
   public void testThatAllGeneratedSyntheticDNumbersAreValid() {
     for (Fodselsnummer fnr : FodselsnummerCalculator.getManySynteticDNumberFodselsnummerForDate(date)) {
-      assertTrue(FodselsnummerValidator.isValid(fnr.toString()), "Ugyldig fødselsnummer: " + fnr);
+      assertTrue("Ugyldig fødselsnummer: " + fnr, FodselsnummerValidator.isValid(fnr.toString()));
     }
   }
 
