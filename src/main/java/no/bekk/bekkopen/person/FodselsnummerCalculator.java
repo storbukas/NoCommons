@@ -13,25 +13,18 @@ public class FodselsnummerCalculator {
 		super();
 	}
 
-  /**
-   * Returns a List with valid Fodselsnummer instances for a given Date and gender.
-   *
-   * @param date en dato
-   * @param kjonn kjønn
-   * @return liste med fødselsnummer
-   */
-
+	/**
+	 * Returns a List with valid Fodselsnummer instances for a given Date and gender.
+	 */
 	public static List<Fodselsnummer> getFodselsnummerForDateAndGender(Date date, KJONN kjonn) {
 		List<Fodselsnummer> result = getManyFodselsnummerForDate(date);
 		splitByGender(kjonn, result);
 		return result;
 	}
 
-  /**
-   * Return one random valid fodselsnummer on a given date
-   * @param date en dato
-   * @return et fødselsnummer
-   */
+	/**
+	 * Return one random valid fodselsnummer on a given date
+	 */
 	public static Fodselsnummer getFodselsnummerForDate(Date date){
 		List<Fodselsnummer> fodselsnummerList = getManyFodselsnummerForDate(date);
 		Collections.shuffle(fodselsnummerList);
