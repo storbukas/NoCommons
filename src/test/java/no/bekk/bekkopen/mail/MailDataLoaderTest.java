@@ -1,5 +1,6 @@
 package no.bekk.bekkopen.mail;
 
+import no.bekk.bekkopen.NoCommonsBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MailDataLoaderTest {
+public class MailDataLoaderTest extends NoCommonsBase {
 
   @BeforeEach
   public void setUpLocaleAndLoadData() throws Exception {
