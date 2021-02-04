@@ -5,8 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * Utility class for Norwegian dates.
@@ -93,10 +95,10 @@ public class NorwegianDateUtil {
 	 */
 	private static Set<Date> getHolidaySet(int year) {
 		if (holidays == null) {
-			holidays = new HashMap<>();
+			holidays = new HashMap<Integer, Set<Date>>();
 		}
 		if (!holidays.containsKey(year)) {
-			Set<Date> yearSet = new HashSet<>();
+			Set<Date> yearSet = new HashSet<Date>();
 
 			// Add set holidays.
 			yearSet.add(getDate(1, Calendar.JANUARY, year));

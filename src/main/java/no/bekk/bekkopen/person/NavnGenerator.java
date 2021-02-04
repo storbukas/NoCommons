@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.Random;
 
 /**
  * Generator for Norwegian names - a {@link Navn}.
- *
+ * 
  * Picks random names from the most common names in 2009.
- *
+ * 
  * <h2>Sources:</h2>
  * <ul>
  * <li><a href="http://www.ssb.no/navn/fornavn-kvinner-200.html">Statistisk
@@ -24,7 +24,7 @@ import java.util.Random;
  * <li><a href="http://www.ssb.no/navn/etternavn-200.html">Statistisk
  * Sentralbyrås liste over de 3229 mest brukte etternavn i 2009</a></li>
  * </ul>
- *
+ * 
  */
 
 public class NavnGenerator {
@@ -62,7 +62,7 @@ public class NavnGenerator {
 	}
 
 	private static List<Navn> genererNavn(final int antall, final KJONN kjonn) {
-		List<Navn> navneliste = new ArrayList<>(antall);
+		List<Navn> navneliste = new ArrayList<Navn>(antall);
 		KJONN kjonnSwitch = kjonn;
 		while (navneliste.size() < antall) {
 			if (KJONN.erBegge(kjonn)) {
@@ -109,9 +109,9 @@ public class NavnGenerator {
 	}
 
 	private static List<String> csv2List(InputStream is) {
-		InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+		InputStreamReader isr = new InputStreamReader(is, Charset.forName("UTF-8"));
 		BufferedReader br = new BufferedReader(isr);
-		List<String> vList = new ArrayList<>();
+		List<String> vList = new ArrayList<String>();
 		String[] array;
 		String line;
 		try {
